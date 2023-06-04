@@ -28,7 +28,8 @@ export const Head = (props) => {
   
   return <SEOHead {...homepage} />
 }
-export const query = graphql`
+if (typeof window !== `undefined`) {
+  export const query = graphql`
   {
     homepage {
       id
