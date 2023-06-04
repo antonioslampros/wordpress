@@ -15,15 +15,24 @@ export default function Homepage(props) {
   
     <Layout>
       {homepage.blocks.map((block) => {
-        const { id, blocktype, ...componentProps } = block
-        const Component = sections[blocktype] || Fallback
-        return <Component key={id} {...componentProps} />
+        
+        if (typeof window !== `undefined`) {
+          const { id, blocktype, ...componentProps } = block
+          const Component = sections[blocktype] || Fallback
+          return <Component key={id} {...componentProps} />
+        }
+        
+        
+        
       })}
     </Layout>
   )
 }
 export const Head = (props) => {
-  const { homepage } = props.data
+  if (typeof window !== `undefined`) {
+    const { homepage } = props.data
+  }
+
   return <SEOHead {...homepage} />
 }
 export const query = graphql`
